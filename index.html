@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Easy Wedding Planning Assistant</title>
+    <style>
+        /* Global reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Top Bar */
+        .top-bar {
+            background-color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .search-container {
+            flex: 1;
+        }
+
+        .search-input {
+            width: 100%;
+            max-width: 400px;
+            padding: 8px 12px;
+            border: 1px solid #ccc;
+            border-radius: 20px;
+            font-size: 16px;
+        }
+
+        .top-links a {
+            margin-left: 20px;
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .top-links a:hover {
+            color: #f48fb1;
+        }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #333;
+            padding: 20px 0;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 20px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
+
+        nav a:hover {
+            color: #f48fb1;
+        }
+
+        /* Hero Section */
+        .hero {
+            background-image: url('https://images.pexels.com/photos/1578873/pexels-photo-1578873.jpeg');
+            background-size: cover;
+            background-position: center;
+            color: #fff;
+            text-align: center;
+            padding: 100px 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero h1 {
+            font-size: 60px;
+            font-weight: bold;
+        }
+
+        .hero p {
+            font-size: 22px;
+        }
+
+        .section {
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .our-services {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        .our-services img {
+            max-width: 45%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .scroll-container {
+            display: flex;
+            overflow-x: auto;
+            padding: 20px;
+            gap: 15px;
+            scroll-snap-type: x mandatory;
+        }
+
+        .scroll-item {
+            flex: 0 0 auto;
+            width: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            background: white;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .scroll-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .scroll-item h3 {
+            font-size: 18px;
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .scroll-item a {
+            display: inline-block;
+            padding: 8px 12px;
+            margin-top: 8px;
+            background-color: #f48fb1;
+            color: white;
+            text-decoration: none;
+            font-size: 14px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .scroll-item a:hover {
+            background-color: #d81b60;
+        }
+
+        .footer-about {
+            background-image: url('https://images.pexels.com/photos/7119379/pexels-photo-7119379.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 80px 20px;
+            position: relative;
+        }
+
+        .footer-about h2 {
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .footer-about p {
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 20px;
+        }
+
+        .footer-about .contact-btn {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #f48fb1;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+            border-radius: 5px;
+            transition: 0.3s;
+        }
+
+        .footer-about .contact-btn:hover {
+            background-color: #d81b60;
+        }
+
+        footer {
+            background-color: #fff;
+            color: black;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer p {
+            font-size: 14px;
+        }
+
+        footer a {
+            color: black;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        footer a:hover {
+            color: #f48fb1;
+        }
+  /* WhatsApp Button */
+        .whatsapp-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-size: 16px;
+            cursor: pointer;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Top Bar -->
+    <div class="top-bar">
+        <div class="search-container">
+            <input type="text" placeholder="Search..." class="search-input">
+        </div>
+        <div class="top-links">
+            <a href="#">Join / Sign In</a>
+            <a href="#">Are You a Vendor?</a>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">Services</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h1>Your Dream Wedding Awaits</h1>
+        <p>Let us help you plan the perfect wedding.</p>
+    </div>
+
+    <!-- Intro Section -->
+    <div class="section">
+        <h2>Welcome to Easy Wedding Planner, the professional support for your BIG day.</h2>
+        <p>Dream of having a moment of your lifetime, but have no clue where to start? Congratulations, your stress-free wedding journey starts here.</p>
+    </div>
+
+    <!-- Our Services -->
+    <div class="section">
+        <h2>Our Services</h2>
+        <div class="our-services">
+            <img src="https://i.pinimg.com/736x/5d/22/e8/5d22e869aa097b185d1c1c81a613cb6f.jpg" alt="Service 1">
+            <img src="https://i.pinimg.com/736x/c1/7d/05/c17d05733f5366923778c13fd35f1008.jpg" alt="Service 2">
+        </div>
+    </div>
+
+    <!-- Vendor Directory -->
+    <div class="section">
+        <h2>Vendor Directory</h2>
+        <div class="scroll-container">
+            <div class="scroll-item">
+                <img src="https://www.conferencecontacts.co.uk/wp-content/uploads/2015/11/Palazzo-Versace-Restaurant.jpg" alt="Vendor 1">
+                <h3>Palazzo Vercace Dubai</h3>
+                <a href="https://www.palazzoversace.ae/weddings">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://cdn.sanity.io/images/helyis1v/production/fec30754f3d62ac69996b40805f4b04669f749eb-1024x768.jpg" alt="Vendor 2">
+                <h3>Garuda Wisnu Kencana Bali</h3>
+                <a href="https://www.gwkbali.com/pages/wedding">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/05/af/65/05af653a82faad5bc7451973965d8c95.jpg" alt="Vendor 3">
+                <h3>The Ritz-Carlton Hotel</h3>
+                <a href="https://www.ritzcarlton.com/en/hotels/jktrt-the-ritz-carlton-jakarta-pacific-place/weddings/">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/1f/b0/14/1fb0149f32aa01799acf8be8f8f331b7.jpg" alt="Vendor 4">
+                <h3>The Lombok Lodge</h3>
+                <a href="#">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/bc/fa/0d/bcfa0de21849ac7a36979661334a9a63.jpg" alt="Vendor 5">
+                <h3>Borobudur Hotel</h3>
+                <a href="https://www.hotelborobudur.com/weddings/">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/85/82/bd/8582bd08892227ba8e87cd90cd3cdeca.jpg" alt="Vendor 6">
+                <h3>Mandarin Oriental Taiwan</h3>
+                <a href="https://www.mandarinoriental.com/en/celebrate">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/58/ec/e7/58ece764a6c282cc978f6498ed0ce347.jpg" alt="Vendor 7">
+                <h3>Kaamala Resort Bali</h3>
+                <a href="https://m.kaamalaresort.com/home">See Details</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Real Weddings -->
+    <div class="section">
+        <h2>Real Weddings</h2>
+        <div class="scroll-container">
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/6a/ef/b7/6aefb7ec12e5a17bdd0a7e8e824ffc4e.jpg" alt="Wedding 1">
+                <h3>Jesse & Maudy</h3>
+                <a href="https://voi.id/en/lifestyle/170500/">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/c6/81/21/c6812101894ef8bfa0c76d144c3f9248.jpg" alt="Wedding 2">
+                <h3>Rey & Dinda</h3>
+                <a href="https://www.idntimes.com/hype/entertainment/andi-aris/10-gaya-kece-post-wedding-dinda-hauw-rey-mbayang-dengan-pakaian-adat">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/7d/dd/bc/7dddbc08b8a4e2c1c8954ed336398002.jpg" alt="Wedding 3">
+                <h3>Justin & Hailey</h3>
+                <a href="https://www.harpersbazaar.com/celebrity/latest/a29271510/justin-bieber-hailey-baldwin-wedding-photos/">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/8b/ad/46/8bad468f4654f9302912e667037d2cb6.jpg" alt="Wedding 4">
+                <h3>Sayan & Vina</h3>
+                <a href="#">See Details</a>
+            </div>
+            <div class="scroll-item">
+                <img src="https://i.pinimg.com/736x/82/ad/9e/82ad9ef791aea143da60211a85507b66.jpg" alt="Wedding 5">
+                <h3>Lin Yi & Pei Yun</h3>
+                <a href="#">See Details</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer About Us -->
+    <div class="footer-about">
+        <h2>About Us</h2>
+        <p>We are dedicated to making your wedding dreams come true with seamless planning and expert coordination.</p>
+        <a href="contact.html" class="contact-btn">Contact Us</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Wedding Planner. All Rights Reserved. | <a href="#">Privacy Policy</a></p>
+        <p>Follow us:</p>
+        <a href="#">Facebook</a>
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+    </footer>
+
+ <!-- WhatsApp Button -->
+    <a href="https://wa.me/6281234567890?text=Hi%20Wedding%20Planner!%20I%20need%20help%20with%20my%20wedding%20plans." target="_blank" class="whatsapp-button">
+        💬 Chat via WhatsApp
+    </a>
+
+</body>
+</html>
